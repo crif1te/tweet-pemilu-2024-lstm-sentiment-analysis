@@ -21,12 +21,11 @@ def predict_sentiment(text):
     padded_sequences = pad_sequences(sequences, maxlen=max_len)
     prediction = model.predict(padded_sequences)[0]
     
+    sentiment = 'Neutral'
     if prediction[0] >= 0.5:
         sentiment = 'Positive'
     elif prediction[1] >= 0.5:
         sentiment = 'Negative'
-    else:
-        sentiment = 'Neutral'
     
     return sentiment, prediction
 
@@ -77,7 +76,12 @@ with tab1:
                 status_text.empty()
                 bar.empty()
 
-        result = f":green[**{sentiment}**] (Score: {prediction:.2f})" if sentiment == 'Positive' else f":red[**{sentiment}**] (Score: {prediction:.2f})" if sentiment == 'Negative' else f":blue[**{sentiment}**] (Score: {prediction:.2f})"
+        if sentiment == 'Positive':
+            result = f":green[**{sentiment}**] (Score: {prediction[0]:.2f})"
+        elif sentiment == 'Negative':
+            result = f":red[**{sentiment}**] (Score: {prediction[1]:.2f})"
+        else:
+            result = f":blue[**{sentiment}**] (Score: {prediction[2]:.2f})"
 
     st.write("")
     st.write("")
