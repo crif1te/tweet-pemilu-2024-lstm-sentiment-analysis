@@ -19,14 +19,8 @@ max_len = 100  # Sesuaikan dengan panjang maksimum yang digunakan saat melatih m
 def predict_sentiment(text):
     sequences = tokenizer.texts_to_sequences([text])
     padded_sequences = pad_sequences(sequences, maxlen=max_len)
-    prediction = model.predict(padded_sequences)[0]
-    
-    sentiment = 'Neutral'
-    if prediction[0] > 0.5:
-        sentiment = 'Positive'
-    elif prediction[1] < 0.5:
-        sentiment = 'Negative'
-    
+    prediction = model.predict(padded_sequences)[0][0]
+    sentiment = 'Positive' if prediction >= 0.5 else 'Negative'
     return sentiment, prediction
 
 # Streamlit app setup
@@ -76,12 +70,7 @@ with tab1:
                 status_text.empty()
                 bar.empty()
 
-        if sentiment == 'Positive':
-            result = f":green[**{sentiment}**] (Score: {prediction[0]:.2f})"
-        elif sentiment == 'Negative':
-            result = f":red[**{sentiment}**] (Score: {prediction[1]:.2f})"
-        else:
-            result = f":blue[**{sentiment}**] (Score: {prediction[2]:.2f})"
+        result = f":green[**{sentiment}**] (Score: {prediction:.2f})" if sentiment == 'Positive' else f":red[**{sentiment}**] (Score: {prediction:.2f})"
 
     st.write("")
     st.write("")
@@ -116,7 +105,7 @@ with tab2:
         result_arr = []
 
         for prediction in prediction_arr:
-            result = "Positive" if prediction == 'Positive' else "Negative" if prediction == 'Negative' else "Neutral"
+            result = "Positive" if prediction == 'Positive' else "Negative"
             result_arr.append(result)
 
         uploaded_result = pd.DataFrame({'Prediction Result': result_arr})
