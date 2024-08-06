@@ -23,7 +23,7 @@ def predict_sentiment(text):
     sentiment = 'Positive' 
     if prediction < 0.5:
         sentiment = 'Negative'
-    elif prediction = 0.5:
+    elif prediction == 0.5:
         sentiment = 'Neutral'
     return sentiment, prediction
 
