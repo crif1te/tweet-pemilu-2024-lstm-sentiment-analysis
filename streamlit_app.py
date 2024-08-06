@@ -22,9 +22,9 @@ def predict_sentiment(text):
     prediction = model.predict(padded_sequences)[0]
     
     sentiment = 'Neutral'
-    if prediction[0] >= 0.5:
+    if prediction[0] > 0.5:
         sentiment = 'Positive'
-    elif prediction[1] <= 0.5:
+    elif prediction[1] < 0.5:
         sentiment = 'Negative'
     
     return sentiment, prediction
