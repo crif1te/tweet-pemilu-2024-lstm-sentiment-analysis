@@ -31,7 +31,7 @@ def predict_sentiment(text):
 st.set_page_config(page_title="Sentiment Analysis", page_icon=":speech_balloon:")
 
 st.title("Sentiment Analysis of 2024 General Election Tweets")
-st.write(f"**_Model's Accuracy_** :  :green[**92.1**]% (:red[_Do not copy outright_])")
+st.write(f"**_Model's Accuracy_** :  :green[**84.30**]% (:red[_Do not copy outright_])")
 st.write("")
 
 tab1, tab2 = st.tabs(["Single-predict", "Multi-predict"])
