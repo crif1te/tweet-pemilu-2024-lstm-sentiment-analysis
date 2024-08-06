@@ -20,11 +20,11 @@ def predict_sentiment(text):
     sequences = tokenizer.texts_to_sequences([text])
     padded_sequences = pad_sequences(sequences, maxlen=max_len)
     prediction = model.predict(padded_sequences)[0][0]
-    sentiment = 'Positive' 
+    sentiment = 'Neutral' 
     if prediction < 0.5:
         sentiment = 'Negative'
-    elif prediction == 0.5:
-        sentiment = 'Neutral'
+    elif prediction > 0.5:
+        sentiment = 'Positive'
     return sentiment, prediction
 
 # Streamlit app setup
