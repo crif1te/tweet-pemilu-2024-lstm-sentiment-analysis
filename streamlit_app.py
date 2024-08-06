@@ -48,7 +48,7 @@ with tab1:
 
     st.header("User Input as DataFrame")
     st.write("")
-    st.dataframe(preview_df)
+    st.dataframe(preview_df, width=1000, height=500)
 
     result = ":violet[-]"
 
